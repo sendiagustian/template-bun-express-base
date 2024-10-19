@@ -1,0 +1,11 @@
+# Build docker
+docker build -f "Dockerfile-local" -t sendiagustian/protonema/bun/user-management-service .
+
+# Test run local container
+docker container create --name user-management-service --publish 8000:5050 sendiagustian/protonema/bun/user-management-service
+
+# untuk masuk container
+docker exec -it user-management-service sh
+
+# delete image <none>
+docker rmi $(docker images --filter "dangling=true" -q --no-trunc)

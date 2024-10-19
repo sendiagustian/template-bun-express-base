@@ -1,0 +1,43 @@
+{
+  "entryFile": "src/index.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": [
+    "src/routes/**/*.ts"
+  ],
+  "routes": {
+    "routesDir": "docs",
+    "specVersion": 3
+  },
+  "spec": {
+    "outputDirectory": "docs",
+    "specVersion": 3,
+    "securityDefinitions": {
+      "X-API-TOKEN": {
+        "type": "apiKey",
+        "name": "X-API-TOKEN",
+        "in": "header"
+      }
+    },
+    "spec": {
+      "openapi": "3.0.0",
+      "info": {
+        "title": "User Management API",
+        "version": "1.0.0",
+        "contact": {
+          "name": "PT. Protonema",
+          "email": "info@protonema.co.id"
+        },
+        "license": {
+          "name": "MIT",
+          "url": "https://opensource.org/licenses/MIT"
+        }
+      },
+      "servers": [
+        {
+          "url": "http://127.0.0.1:5050",
+          "description": "Server environment"
+        }
+      ]
+    }
+  }
+}

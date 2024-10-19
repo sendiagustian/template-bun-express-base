@@ -1,0 +1,27 @@
+FROM oven/bun:latest AS builder
+WORKDIR /app
+
+COPY . .
+
+RUN bun install --production
+RUN bun run build:dev
+
+# Stage 2: Run the app
+FROM debian:stable-slim AS Runner
+WORKDIR /app
+
+RUN apt-get install -y libc6 && rm -rf /var/lib/apt/lists/*
+RUN ulimit -n 65536
+
+RUN mkdir /app/docs
+RUN mkdir /app/build
+RUN mkdir /app/node_modules
+
+COPY --from=builder /app/tsoa.json /app/
+COPY --from=builder /app/node_modules /app/node_modules/
+COPY --from=builder /app/docs/* /app/docs/
+COPY --from=builder /app/build/* /app/build/
+
+EXPOSE 8080
+
+CMD ["./build/app.bun"]
