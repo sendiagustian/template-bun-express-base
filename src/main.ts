@@ -3,8 +3,10 @@ import cluster from "cluster";
 import { web } from "./app/configs/Web";
 import { logger } from "./app/utils/Logging";
 
-const base = process.env.BASE_URL || "http://127.0.0.1";
-const port = process.env.PORT || 3000;
+const host =
+    process.env.MODE == "production"
+        ? `http://127.0.0.1:${process.env.PORT}`
+        : process.env.BASE_URL + ":" + process.env.PORT || "http://127.0.0.1:5050";
 
 if (cluster.isPrimary) {
     const numCPUs = os.cpus().length;
@@ -18,5 +20,5 @@ if (cluster.isPrimary) {
         cluster.fork(); // Memulai ulang worker yang mati
     });
 } else {
-    web.listen(port, () => logger.info(`Server is running on ${base}:${port}/api/docs`));
+    web.listen(process.env.PORT, () => logger.info(`Server is running on ${host}/api/docs`));
 }

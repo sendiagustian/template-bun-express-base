@@ -12,7 +12,7 @@ export class ServiceError extends Error {
     }
 }
 
-export function erroHandle(error: any, next: NextFunction): ErrorResponse {
+export function errorHandle(error: any, next: NextFunction): ErrorResponse {
     if (error instanceof ZodError) {
         // Handle ZodError
         const message = error.issues.map((issue) => `${issue.message} in field ${issue.path.join(".")}`).join(" & ");

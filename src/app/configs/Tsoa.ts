@@ -4,10 +4,13 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const apiVersion = process.env.API_VERSION || "v1";
-const host = process.env.BASE_URL + ":" + process.env.PORT || "http://127.0.0.1:8080";
+const host =
+    process.env.MODE == "production"
+        ? process.env.BASE_URL
+        : process.env.BASE_URL + ":" + process.env.PORT || "http://127.0.0.1:5050";
 
 const tsoaConfig = {
-    entryFile: "src/index.ts",
+    entryFile: "src/main.ts",
     noImplicitAdditionalProperties: "throw-on-extras",
     controllerPathGlobs: ["src/routes/**/*.ts"],
     routes: {
@@ -27,11 +30,11 @@ const tsoaConfig = {
         spec: {
             openapi: "3.0.0",
             info: {
-                title: "User Management API",
+                title: "Docs API Tong Nyampah",
                 version: apiVersion,
                 contact: {
-                    name: "PT. Protonema",
-                    email: "info@protonema.co.id"
+                    name: "Sendi Studio",
+                    email: "sendiagustian@sendistudio.id"
                 },
                 license: {
                     name: "MIT",

@@ -1,6 +1,6 @@
 {
   "name": "user-service",
-  "module": "src/index.ts",
+  "module": "src/main.ts",
   "type": "module",
   "routes": {
     "controllerPathGlobs": [
@@ -9,18 +9,18 @@
   },
   "scripts": {
     "start": "./build/app.bun",
-    "local": "concurrently \"bun --env-file=.env.local run src/app/utils/TsoaConfig.ts\" \"nodemon --watch src --exec bun --env-file=.env.local run --max-old-space-size=512 src/index.ts\" \"nodemon --watch src -x tsoa spec-and-routes\"",
-    "dev": "concurrently \"bun --env-file=.env.development run src/app/utils/TsoaConfig.ts\" \"nodemon --watch src --exec bun --env-file=.env.development run --max-old-space-size=512 src/index.ts\" \"nodemon --watch src -x tsoa spec-and-routes\"",
-    "prod": "concurrently \"bun --env-file=.env.production run src/app/utils/TsoaConfig.ts\" \"nodemon --watch src --exec bun --env-file=.env.production run --max-old-space-size=512 src/index.ts\" \"nodemon --watch src -x tsoa spec-and-routes\"",
-    "build:local": "bun --env-file=.env.local run src/app/utils/TsoaConfig.ts && bun tsoa spec-and-routes && bun --env-file=.env.local build --max-old-space-size=512 src/index.ts --compile --minify --outfile build/app.bun --target bun",
-    "build:dev": "bun --env-file=.env.development run src/app/utils/TsoaConfig.ts && bun tsoa spec-and-routes && bun --env-file=.env.development build --max-old-space-size=512 src/index.ts --compile --minify --outfile build/app.bun --target bun",
-    "build:prod": "bun --env-file=.env.production run src/app/utils/TsoaConfig.ts && bun tsoa spec-and-routes && bun --env-file=.env.production build --max-old-space-size=512 src/index.ts --compile --minify --outfile build/app.bun --target bun",
+    "local": "concurrently \"bun --env-file=.env.local run src/app/configs/Tsoa.ts\" \"nodemon --watch src --exec bun --env-file=.env.local run --max-old-space-size=512 src/main.ts\" \"nodemon --watch src -x tsoa spec-and-routes\"",
+    "dev": "concurrently \"bun --env-file=.env.development run src/app/configs/Tsoa.ts\" \"nodemon --watch src --exec bun --env-file=.env.development run --max-old-space-size=512 src/main.ts\" \"nodemon --watch src -x tsoa spec-and-routes\"",
+    "prod": "concurrently \"bun --env-file=.env.production run src/app/configs/Tsoa.ts\" \"nodemon --watch src --exec bun --env-file=.env.production run --max-old-space-size=512 src/main.ts\" \"nodemon --watch src -x tsoa spec-and-routes\"",
+    "build:local": "bun --env-file=.env.local run src/app/configs/Tsoa.ts && bun tsoa spec-and-routes && bun --env-file=.env.local build --max-old-space-size=512 src/main.ts --compile --minify --outfile build/app.bun --target bun",
+    "build:dev": "bun --env-file=.env.development run src/app/configs/Tsoa.ts && bun tsoa spec-and-routes && bun --env-file=.env.development build --max-old-space-size=512 src/main.ts --compile --minify --outfile build/app.bun --target bun",
+    "build:prod": "bun --env-file=.env.production run src/app/configs/Tsoa.ts && bun tsoa spec-and-routes && bun --env-file=.env.production build --max-old-space-size=512 src/main.ts --compile --minify --outfile build/app.bun --target bun",
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix "
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.6.3"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -33,13 +33,13 @@
     "morgan": "^1.10.0",
     "mysql2": "^3.11.3",
     "swagger-ui-express": "^5.0.1",
-    "tsoa": "^6.4.0",
+    "tsoa": "^6.5.1",
     "uuid": "^10.0.0",
     "winston": "^3.15.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@eslint/js": "^9.12.0",
+    "@eslint/js": "^9.13.0",
     "@types/bun": "latest",
     "@types/cors": "^2.8.17",
     "@types/crypto-js": "^4.2.2",
@@ -49,10 +49,10 @@
     "@types/swagger-ui-express": "^4.1.6",
     "@types/uuid": "^10.0.0",
     "concurrently": "^9.0.1",
-    "eslint": "^9.12.0",
+    "eslint": "^9.13.0",
     "globals": "^15.11.0",
     "nodemon": "^3.1.7",
     "prettier": "^3.3.3",
-    "typescript-eslint": "^8.8.1"
+    "typescript-eslint": "^8.10.0"
   }
 }

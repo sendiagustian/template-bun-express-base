@@ -3,13 +3,7 @@ import { logger } from "../utils/Logging";
 import { decode } from "../utils/Decrypt";
 
 async function connectToDatabase(): Promise<Connection> {
-    if (
-        !process.env.DB_HOST ||
-        !process.env.DB_PORT ||
-        !process.env.DB_USER ||
-        !process.env.DB_PASS ||
-        !process.env.DB_NAME
-    ) {
+    if (!process.env.DB_HOST || !process.env.DB_PORT || !process.env.DB_USER || !process.env.DB_PASS || !process.env.DB_NAME) {
         throw new Error("Database configuration not found");
     }
 
@@ -17,6 +11,10 @@ async function connectToDatabase(): Promise<Connection> {
     const dbPort = decode(process.env.DB_PORT!);
     const dbUser = decode(process.env.DB_USER!);
     const dbPass = decode(process.env.DB_PASS!);
+
+    if (dbHost === "" || dbPort === "" || dbUser === "" || dbPass === "") {
+        throw new Error("Secret key incorect or Database env not found");
+    }
 
     const connection = createPool({
         connectionLimit: 5,
